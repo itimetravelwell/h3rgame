@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H3R</title>
+
+    <script src="http://olado.github.io/doT/doT.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="dedalus.js"></script>
+    <script src="dedalus-web.js"></script>
+
+    <link rel="stylesheet" href="themes/nix/story.css">
+
+ </head>
+<body>
+    <div id="story">
+
+        <initscript>
+        story.numberOfKills = 0;
+        story.isMatsushimaASickSerialKiller = function () {
+            return story.numberOfKills > 10;
+        };
+        story.triedToTakeTheScrewDriver = false;
+         
+        </initscript>
+
+        <beforeEveryThing>
+
+        </beforeEveryThing>
+
+        <beforeEveryPageTurn>
+        </beforeEveryPageTurn>
+
+        <beforeEveryParagraphShown>
+        </beforeEveryParagraphShown>
+
+        <afterEveryThing>
+        </afterEveryThing>
+
+        <afterEveryPageTurn>
+        </afterEveryPageTurn>
+
+        <afterEveryParagraphShown>
+        </afterEveryParagraphShown>
+
+        <!-- Novel -->
+        <title>h3r AKA Dinner With a Side Order of HeartBreak</title>
+
+        <!-- Objects -->
+        <obj id="phone" inventoryName="Monolith 3S">
+            <action id="Examine">
+                Latest and Greatest from Th3 Company
+            </action>
+
+            <action id="Get">
+                <when>!story.isInInventory('phone')</when>
+                As you try to get it... It is clear that the inventory works!
+                {{ story.putInInventory('phone'); }}
+            </action>
+
+        </obj>
+
+        <!-- Pages -->
+        <page id="intro">
+            <p>THIS IS A TRUE STORY. The events depicted in this game took place in 2012. </p>
+            
+           <p> At the request of the surviours, the names have been changed.</p>
+            
+           <p> Out of respect of those lost the rest has been told exactly as it occurred.</p>
+        </page>
+        <page id="PageName" class=first>
+            <p>Press <turn to="marina1">here</turn> to continue.</p>
+        </page>
+
+        <page id="marina1" >
+            <p>On a busy summer day by the waterfront, while everyone is going on about their lives, you find yourself sitting quietly on a bench.
+            </p><p>As the sun sets in the background out at <turn to="sea">SEA</turn>, you see a <turn to="clock">CLOCK</turn> in the centre of the dock.</p>
+            <p>You feel your <interact with="phone">phone</interact> vibrate and ring
+            </p>
+        </page>
+
+        <page id="sea">
+        You turn towards the ocean, and look as the sun appears to be sinking into the horzion. The skies are clear and the clouds and ships are sailing. You can still hear the noise and commotion from the <turn to="marina1">DOCK</turn></page>
+
+        <page id="clock">
+        You look towards the old style clock, it reads <td id="writeday"></td> 
+        </page>
+
+<!--
+        <paragraph id="notGoodIdea">
+    Hmm... It doesn't seem like a very good idea to do... Well, you do whatever you want to do!
+        </paragraph>
+-->
+<!--
+        <page id="dummyPage" class="first">
+    You are in an empty page except for a <show paragraph="dummyParagraph">paragraph</show>.
+
+            <p>Quite unsurprisingly, there is even an <interact with="dummyObject">object</interact> lying around.</p>
+
+            <p>Looking around with more attention, you notice <turn to="otherPage">another page</turn></p>
+
+            <paragraph id="dummyParagraph">
+                Seiously, What did you expect?
+            </paragraph>
+
+        </page>
+-->
+
+        <page id="otherPage">
+            Plot twist! The story ends abruptly.
+            {{ story.endGame(); }}
+        </page>
+
+    </div>
+
+    <div id="wrapper">
+        <div id="title"></div>
+
+        <div id="inventoryHostWrapper">
+            <h2>Inventory</h2>
+            <div id="inventoryHost"></div>
+        </div>
+
+        <div id="host"></div>
+    </div>
+
+    <div id="interactionHost"></div>
+
+    <div id="undoStageHost"></div>
+
+    <div id="footer">
+        <a id="undoHost" href="#">Undo</a> &bull; <a id="saveHost" href="#">Save</a> &bull; <a id="restoreHost" href="#">Restore</a> &bull; <a id="reseteHost" href="#">Reset</a>
+    </div>
+
+    <script>
+        $(function () {
+            new DedalusWeb({
+                domSource         : $('#story'),
+                domTarget         : $('#host'),
+                titleTarget       : $('#title'),
+                inventoryTarget   : $('#inventoryHost'),
+                interactionTarget : $('#interactionHost'),
+                undoTarget        : $('#undoHost'),
+                undoStageTarget   : $('#undoStageHost'),
+                saveTarget        : $('#saveHost'),
+                restoreTarget     : $('#restoreHost'),
+                resetTarget       : $('#reseteHost'),
+            });
+        });
+
+    </script>
+</body>
+</html>
